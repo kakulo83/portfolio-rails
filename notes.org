@@ -1,0 +1,28 @@
+* commands
+bundle install
+
+bin/rails s
+
+* data model
+#+BEGIN_SRC 
+POSTS
+----------
+id
+title
+created-at
+updated-at
+
+CONTENTS
+-----------
+id        INT
+post-id   INT (FOREIGN-KEY)
+order     INT
+body      TEXT
+type      STRING   (header, paragraph, code, image, demo)
+meta      jsonb    { language: 'python' },  { alt: 'this is an image of a cat etc' }
+
+SELECT *
+FROM POSTS as p
+INNER JOIN CONTENTS as c
+WHERE c.post_id = p.id
+#+END_SRC
