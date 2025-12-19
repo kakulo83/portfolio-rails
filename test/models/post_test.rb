@@ -1,7 +1,7 @@
 require "test_helper"
 
-describe Post do
-  # it "does a thing" do
-  #   value(1+1).must_equal 2
+class PostTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
   # end
 end

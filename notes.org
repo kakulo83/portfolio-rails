@@ -1,8 +1,11 @@
 * commands
+#+BEGIN_SRC zsh
 bundle install
 
 bin/rails s
 
+bin/rails test test/controllers/sessions_controller_test.rb
+#+END_SRC
 * data model
 #+BEGIN_SRC 
 POSTS
@@ -25,4 +28,25 @@ SELECT *
 FROM POSTS as p
 INNER JOIN CONTENTS as c
 WHERE c.post_id = p.id
+#+END_SRC
+
+
+#+BEGIN_SRC json
+{
+	"id": 1,
+	"type": "post",
+	"title": "My first entry",
+	"children": [
+		{ "type": "header",    "text": "An assortment of stuff"},
+		{ "type": "paragraph", "html": "<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p><a href='https://www.imgur.com' target='_blank'>Imgur</a>"},
+		{ "type": "code",      "language": "javascript", "code": "function resolveAfter2Seconds() {\n  return new Promise((resolve) => {\n    setTimeout(() => {\n\tresolve('resolved');\n    }, 2000);\n\t});\n}\n async function asyncCall() {\n\tconsole.log('calling');\n\tconst result = await resolveAfter2Seconds();\n  console.log(result);\n}" },
+		{ "type": "header",    "text": "Saltwater crocodiles scare me"},
+		{ "type": "paragraph", "html": "<p>The saltwater crocodile (Crocodylus porosus) is a crocodilian native to saltwater habitats, brackish wetlands and freshwater rivers from India's east coast across Southeast Asia and the Sundaland to northern Australia and Micronesia. It has been listed as Least Concern on the IUCN Red List since 1996.[2] It was hunted for its skin throughout its range up to the 1970s, and is threatened by illegal killing and habitat loss. It is regarded as dangerous to humans.[4]</p>"},
+		{ "type": "image",     "src": "https://picsum.photos/200/300", "alt": ""},
+		{ "type": "demo",      "code": "<pre>some cool graphics code here</pre>"}
+	],
+	"date": "2025-12-13T20:08:23.651Z",
+	"summary": "",
+	"tags": []
+}
 #+END_SRC
