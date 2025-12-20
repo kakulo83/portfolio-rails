@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
-  before_action :set_post, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [ :create, :update, :destroy ]
+  before_action :set_post, only: [ :show, :update, :destroy ]
 
   # GET /posts
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    
+
     @posts = Post.page(page).per(per_page)
-    
+
     render json: {
       posts: @posts,
       pagination: {
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
   # GET /posts/:id
   def show
-    render json: @post, include: { contents: { only: [:id, :order, :body, :type, :metadata, :created_at, :updated_at] } }
+    render json: @post
   end
 
   # POST /posts
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      render json: @post, status: :created, include: :contents
+      render json: @post, status: :created
     else
       render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/:id
   def update
     if @post.update(post_params)
-      render json: @post, include: :contents
+      render json: @post
     else
       render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
     end
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(
       :title,
-      contents_attributes: [:id, :order, :body, :type, :metadata, :_destroy]
+      :html
     )
   end
 end

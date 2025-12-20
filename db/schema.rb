@@ -10,23 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_18_180953) do
-  create_table "contents", force: :cascade do |t|
-    t.integer "post_id", null: false
-    t.integer "order"
-    t.text "body"
-    t.string "type"
-    t.json "metadata"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_contents_on_post_id"
-  end
-
+ActiveRecord::Schema[8.0].define(version: 2025_12_18_180746) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
+    t.text "html"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_foreign_key "contents", "posts"
 end
