@@ -41,3 +41,71 @@ should return 403 when destroying post without auth cookie
 should return 403 when destroying post with invalid JWT token
 should return 403 when destroying post with JWT containing wrong email
 #+END_SRC
+
+
+#+BEGIN_SRC json
+{
+        "title": "My First Post",
+        "content": {
+            "time": 1766788911929,
+            "blocks": [
+                {
+                    "id": "vINYajrFp9",
+                    "type": "paragraph",
+                    "data": {
+                        "text": "Interesting content coming..."
+                    }
+                },
+                {
+                    "id": "oxp-Olegsg",
+                    "type": "code",
+                    "data": {
+                        "code": "import { useState, useCallback } from \"react\"\nimport { useNavigate } from \"react-router-dom\"\n\nimport PostEditor from \"./PostEditor\"\n",
+                        "language": "javascript",
+                        "showlinenumbers": true
+                    }
+                },
+                {
+                    "id": "NaR6H-XPud",
+                    "type": "header",
+                    "data": {
+                        "text": "A Big Header",
+                        "level": 2
+                    }
+                },
+                {
+                    "id": "9kSbMRNna0",
+                    "type": "list",
+                    "data": {
+                        "style": "ordered",
+                        "meta": {
+                            "counterType": "numeric"
+                        },
+                        "items": [
+                            {
+                                "content": "do thing",
+                                "meta": {},
+                                "items": []
+                            },
+                            {
+                                "content": "do more thing",
+                                "meta": {},
+                                "items": []
+                            },
+                            {
+                                "content": "stop and take a nap",
+                                "meta": {},
+                                "items": []
+                            }
+                        ]
+                    }
+                }
+            ],
+            "version": "2.31.0"
+        }
+}
+#+END_SRC
+
+#+BEGIN_SRC text
+'{"post":{"title":"My First Post","content":{"time":1766788911929,"blocks":[{"id":"vINYajrFp9","type":"paragraph","data":{"text":"Interesting content coming..."}},{"id":"oxp-Olegsg","type":"code","data":{"code":"import { useState, useCallback } from \\"react\\"\\nimport { useNavigate } from \\"react-router-dom\\"\\n\\nimport PostEditor from \\"./PostEditor\\"\\n","language":"javascript","showlinenumbers":true}},{"id":"NaR6H-XPud","type":"header","data":{"text":"A Big Header","level":2}},{"id":"9kSbMRNna0","type":"list","data":{"style":"ordered","meta":{"counterType":"numeric"},"items":[{"content":"do thing","meta":{},"items":[]},{"content":"do more thing","meta":{},"items":[]},{"content":"stop and take a nap","meta":{},"items":[]}]}}],"version":"2.31.0"}}}'
+#+END_SRC

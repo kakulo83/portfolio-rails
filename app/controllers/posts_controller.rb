@@ -22,7 +22,13 @@ class PostsController < ApplicationController
 
   # GET /posts/:id
   def show
-    render json: @post
+    content_hash = JSON.parse(@post.content.gsub("=>", ":"))
+
+    render json: {
+             title: @post.title,
+             content: content_hash,
+             created_at: @post.created_at
+           }
   end
 
   # POST /posts
@@ -60,9 +66,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(
-      :title,
-      :html
-    )
+    params.expect(post: [ :title, content: {} ])
   end
 end
