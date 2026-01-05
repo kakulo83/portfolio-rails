@@ -1,3 +1,4 @@
+
 class SessionsController < ApplicationController
   def login
     email = params[:email]
@@ -18,5 +19,14 @@ class SessionsController < ApplicationController
     else
       render json: { error: "Unauthorized" }, status: :forbidden
     end
+  end
+
+  def logout
+    cookies.delete(:auth_token, httponly: true)
+    render json: { message: "logout successful" }, status: :ok
+  end
+
+  def authenticated
+    # TODO: return json { authenticated: true/false }
   end
 end

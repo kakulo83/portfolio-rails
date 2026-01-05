@@ -25,6 +25,7 @@ class PostsController < ApplicationController
     content_hash = JSON.parse(@post.content.gsub("=>", ":"))
 
     render json: {
+             id: @post.id,
              title: @post.title,
              content: content_hash,
              created_at: @post.created_at
