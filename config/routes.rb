@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   post "logout", to: "sessions#logout"
 
   # Posts routes
-  resources :posts, only: [ :index, :show, :create, :update, :destroy ]
+  scope "/api" do
+    resources :posts, only: [ :index, :show, :create, :update, :destroy ]
+  end
 
   # Defines the root path route ("/")
   # root "posts#index"

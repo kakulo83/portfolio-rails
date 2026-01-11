@@ -1,3 +1,36 @@
+
+* Digital Ocean (144.126.214.107/)
+144.126.214.107
+- installed nginx
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
+#+BEGIN_SRC bash
+sudo apt update
+sudo apt install nginx
+
+
+# adjusted firewall to only allow HTTPS
+sudo ufw app list
+sudo ufw allow 'Nginx HTTPS'
+
+# enable ufw firewall
+sudo ufw enable
+
+# confirm
+sudo ufw status
+
+# nginx commands
+sudo systemctl stop nginx
+sudo systemctl start nginx
+sudo systemctl restart nginx
+sudo systemctl reload nginx
+
+#+END_SRC
+
+NOTE:  I created a Cloudflare DNS record that points to DigitalOcean.  This record configures ALL traffic to digitalocean be
+proxied through Cloudflare.  This means my droplet is not accessible directly but only through cloudflare.  
+
+
+
 * commands
 #+BEGIN_SRC zsh
 bundle install
