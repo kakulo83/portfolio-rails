@@ -91,6 +91,11 @@ GEM
     drb (2.2.3)
     erb (6.0.1)
     erubi (1.13.1)
+    et-orbi (1.4.0)
+      tzinfo
+    fugit (1.12.1)
+      et-orbi (~> 1.4)
+      raabro (~> 1.4)
     globalid (1.3.0)
       activesupport (>= 6.1)
     i18n (1.14.7)
@@ -118,6 +123,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    kgio (2.11.4)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
@@ -174,8 +180,7 @@ GEM
     psych (5.3.1)
       date
       stringio
-    puma (7.1.0)
-      nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.4)
     rack-cors (3.0.0)
@@ -219,6 +224,7 @@ GEM
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
+    raindrops (0.20.1)
     rake (13.3.1)
     rdoc (6.17.0)
       erb
@@ -257,6 +263,13 @@ GEM
       rubocop-rails (>= 2.30)
     ruby-progressbar (1.13.0)
     securerandom (0.4.1)
+    solid_queue (1.3.0)
+      activejob (>= 7.1)
+      activerecord (>= 7.1)
+      concurrent-ruby (>= 1.3.1)
+      fugit (~> 1.11)
+      railties (>= 7.1)
+      thor (>= 1.3.1)
     sqlite3 (2.8.1-aarch64-linux-gnu)
     sqlite3 (2.8.1-aarch64-linux-musl)
     sqlite3 (2.8.1-arm-linux-gnu)
@@ -279,6 +292,9 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.2.0)
+    unicorn (6.1.0)
+      kgio (~> 2.6)
+      raindrops (~> 0.7)
     uri (1.1.1)
     useragent (0.16.11)
     websocket-driver (0.8.0)
@@ -308,12 +324,13 @@ DEPENDENCIES
   kaminari
   minitest
   minitest-rails
-  puma (>= 5.0)
   rack-cors
   rails (~> 8.0.2)
   rubocop-rails-omakase
+  solid_queue
   sqlite3 (>= 2.1)
   thruster
+  unicorn
 
 BUNDLED WITH
    2.6.9
