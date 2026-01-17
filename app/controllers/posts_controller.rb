@@ -58,6 +58,14 @@ class PostsController < ApplicationController
     head :no_content
   end
 
+  def get_presigned_url
+    key = params[:key]
+    uploader = Uploader.new
+    presigned = uploader.get_url(key)
+    render json: { presigned_url: presigned }
+    # S3 API:   https://7b678ec40bb4006aca9b44d1cb69fdf6.r2.cloudflarestorage.com/portfolio-assets
+  end
+
   private
 
   def set_post

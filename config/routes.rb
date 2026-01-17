@@ -14,8 +14,7 @@ Rails.application.routes.draw do
 
     # Posts routes
     resources :posts, only: [ :index, :show, :create, :update, :destroy ]
-  end
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+    get "upload_url", to: "posts#get_presigned_url"
+  end
 end

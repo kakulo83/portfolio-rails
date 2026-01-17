@@ -29,8 +29,6 @@ sudo systemctl reload nginx
 NOTE:  I created a Cloudflare DNS record that points to DigitalOcean.  This record configures ALL traffic to digitalocean be
 proxied through Cloudflare.  This means my droplet is not accessible directly but only through cloudflare.  
 
-
-
 * commands
 #+BEGIN_SRC zsh
 bundle install
@@ -38,6 +36,19 @@ bundle install
 bin/rails s
 
 bin/rails test test/controllers/sessions_controller_test.rb
+
+# create database
+RAILS_ENV=production bundle exec rake db:create
+RAILS_ENV=production bundle exec rake db:migrate
+
+# start unicorn daemon
+RAILS_ENV=production unicorn -c config/unicorn.rb -D
+
+# get PID of master unicorn process
+ps -ef | grep unicorn | grep master
+
+# kill master process
+kill -USR2 <master_pid>
 #+END_SRC
 * data model
 #+BEGIN_SRC 
@@ -50,95 +61,3 @@ created-at
 updated-at
 #+END_SRC
 
-* test cases
-#+BEGIN_SRC 
-should get index without authentication
-should paginate posts in index
-should return second page of posts
-should use default pagination values when not specified
-should not include content data in index
-should show post without authentication
-should include content data in show
-should create post with valid auth cookie
-should return 403 when creating post without auth cookie
-should return 403 when creating post with invalid JWT token
-should return 403 when creating post with JWT containing wrong email
-should return 403 when creating post with expired JWT token
-should update post with valid auth cookie
-should return 403 when updating post without auth cookie
-should return 403 when updating post with invalid JWT token
-should return 403 when updating post with JWT containing wrong email
-should destroy post with valid auth cookie
-should delete associated contents when deleting post
-should return 403 when destroying post without auth cookie
-should return 403 when destroying post with invalid JWT token
-should return 403 when destroying post with JWT containing wrong email
-#+END_SRC
-
-
-#+BEGIN_SRC json
-{
-        "title": "My First Post",
-        "content": {
-            "time": 1766788911929,
-            "blocks": [
-                {
-                    "id": "vINYajrFp9",
-                    "type": "paragraph",
-                    "data": {
-                        "text": "Interesting content coming..."
-                    }
-                },
-                {
-                    "id": "oxp-Olegsg",
-                    "type": "code",
-                    "data": {
-                        "code": "import { useState, useCallback } from \"react\"\nimport { useNavigate } from \"react-router-dom\"\n\nimport PostEditor from \"./PostEditor\"\n",
-                        "language": "javascript",
-                        "showlinenumbers": true
-                    }
-                },
-                {
-                    "id": "NaR6H-XPud",
-                    "type": "header",
-                    "data": {
-                        "text": "A Big Header",
-                        "level": 2
-                    }
-                },
-                {
-                    "id": "9kSbMRNna0",
-                    "type": "list",
-                    "data": {
-                        "style": "ordered",
-                        "meta": {
-                            "counterType": "numeric"
-                        },
-                        "items": [
-                            {
-                                "content": "do thing",
-                                "meta": {},
-                                "items": []
-                            },
-                            {
-                                "content": "do more thing",
-                                "meta": {},
-                                "items": []
-                            },
-                            {
-                                "content": "stop and take a nap",
-                                "meta": {},
-                                "items": []
-                            }
-                        ]
-                    }
-                }
-            ],
-            "version": "2.31.0"
-        }
-}
-#+END_SRC
-
-#+BEGIN_SRC text
-'{"post":{"title":"My First Post","content":{"time":1766788911929,"blocks":[{"id":"vINYajrFp9","type":"paragraph","data":{"text":"Interesting content coming..."}},{"id":"oxp-Olegsg","type":"code","data":{"code":"import { useState, useCallback } from \\"react\\"\\nimport { useNavigate } from \\"react-router-dom\\"\\n\\nimport PostEditor from \\"./PostEditor\\"\\n","language":"javascript","showlinenumbers":true}},{"id":"NaR6H-XPud","type":"header","data":{"text":"A Big Header","level":2}},{"id":"9kSbMRNna0","type":"list","data":{"style":"ordered","meta":{"counterType":"numeric"},"items":[{"content":"do thing","meta":{},"items":[]},{"content":"do more thing","meta":{},"items":[]},{"content":"stop and take a nap","meta":{},"items":[]}]}}],"version":"2.31.0"}}}'
-#+END_SRC
