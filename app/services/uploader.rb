@@ -1,4 +1,7 @@
 class Uploader
+  # DOCS:
+  # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Bucket.html#presigned_post-instance_method
+  # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/PresignedPost.html
   def initialize
     @r2 = Aws::S3::Client.new(
       access_key_id: Rails.application.credentials.cloudflare_s3_access_key,
