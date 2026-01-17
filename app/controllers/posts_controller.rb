@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [ :create, :update, :destroy ]
+  before_action :authenticate_user!, only: [ :create, :update, :destroy, :get_presigned_url ]
   before_action :set_post, only: [ :show, :update, :destroy ]
 
   # GET /posts
@@ -62,8 +62,9 @@ class PostsController < ApplicationController
     key = params[:key]
     uploader = Uploader.new
     presigned = uploader.get_url(key)
-    render json: { presigned_url: presigned }
-    # S3 API:   https://7b678ec40bb4006aca9b44d1cb69fdf6.r2.cloudflarestorage.com/portfolio-assets
+    render json: {
+             presigned_url: presigned.url
+           }
   end
 
   private

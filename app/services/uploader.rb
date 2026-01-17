@@ -13,11 +13,8 @@ class Uploader
   end
 
   def get_url(key)
-    Aws::S3::PresignedPost.new(creds, "auto", "portfolio-assets", {
-                                       key: key,
-                                       acl: "public-read",
-                                       metadata: {}
-                                     }
-                                    )
+    s3_resource = Aws::S3::Resource.new(client: @r2)
+    bucket = s3_resource.bucket("portfolio-assets")
+    bucket.presigned_post(key: key)
   end
 end
