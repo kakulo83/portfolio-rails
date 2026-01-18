@@ -63,7 +63,7 @@ class PostsController < ApplicationController
     uploader = Uploader.new
     presigned = uploader.get_url(key)
     render json: {
-             presigned_url: presigned.url
+             presigned_url: presigned
            }
   end
 

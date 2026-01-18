@@ -16,8 +16,10 @@ class Uploader
   end
 
   def get_url(key)
-    s3_resource = Aws::S3::Resource.new(client: @r2)
-    bucket = s3_resource.bucket("portfolio-assets")
-    bucket.presigned_post(key: key)
+    # s3_resource = Aws::S3::Resource.new(client: @r2)
+    # bucket = s3_resource.bucket("portfolio-assets")
+    # bucket.presigned_post(key: key)
+    signer = Aws::S3::Presigner.new(client: @r2)
+    signer.presigned_url(:put_object, bucket: "portfolio-assets", key: "test.jpg")
   end
 end
