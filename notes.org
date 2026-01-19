@@ -61,3 +61,13 @@ created-at
 updated-at
 #+END_SRC
 
+* presigned url
+
+#+BEGIN_SRC bash
+curl -X PUT "https://portfolio-assets.7b678ec40bb4006aca9b44d1cb69fdf6.r2.cloudflarestorage.com/test.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=e41a810bb4fa8840724f4414acebcb30%2F20260119%2Fauto%2Fs3%2Faws4_request&X-Amz-Date=20260119T010745Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=1dfd5e0994bdbfda83cb99e9301783c857e699934fa3dca090f91752601cb53c" --data-binary @/Users/robertcarter/Desktop/test.jpg
+
+
+# https://7b678ec40bb4006aca9b44d1cb69fdf6.r2.cloudflarestorage.com
+# 7b678ec40bb4006aca9b44d1cb69fdf6
+# https://7b678ec40bb4006aca9b44d1cb69fdf6.r2.cloudflarestorage.com/portfolio-assets
+#+END_SRC
