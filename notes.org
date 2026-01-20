@@ -71,3 +71,15 @@ curl -X PUT "https://portfolio-assets.7b678ec40bb4006aca9b44d1cb69fdf6.r2.cloudf
 # 7b678ec40bb4006aca9b44d1cb69fdf6
 # https://7b678ec40bb4006aca9b44d1cb69fdf6.r2.cloudflarestorage.com/portfolio-assets
 #+END_SRC
+
+#+BEGIN_SRC 
+
+#+END_SRC
+
+
+# /ssh:root@144.126.214.107:/etc/nginx/sites-available/rcarter.io
+#+BEGIN_SRC 
+/ssh:root@144.126.214.107:/etc/systemd/system/puma.service
+#+END_SRC
+
+#+BEGIN_SRC 

@@ -4,7 +4,7 @@ source "https://rubygems.org"
 gem "rails", "~> 8.0.2"
 gem "sqlite3", ">= 2.1"
 gem "puma", ">= 5.0"
-# gem "unicorn"
+gem "unicorn"
 gem "jbuilder"
 
 # Reduces boot times through caching; required in config/boot.rb
