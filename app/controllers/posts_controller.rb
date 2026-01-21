@@ -7,7 +7,11 @@ class PostsController < ApplicationController
     page = params[:page] || 1
     per_page = params[:per_page] || 10
 
-    @posts = Post.page(page).per(per_page)
+    if is_admin?
+      @posts = Post.page(page).per(per_page)
+    else
+      @posts = Post.where(draft: false).page(page).per(per_page)
+    end
 
     render json: {
       posts: @posts,
@@ -28,7 +32,8 @@ class PostsController < ApplicationController
              id: @post.id,
              title: @post.title,
              content: content_hash,
-             created_at: @post.created_at
+             created_at: @post.created_at,
+             draft: @post.draft
            }
   end
 
@@ -71,11 +76,17 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+
+    if not is_admin? and @post.draft
+      raise ActiveRecord::RecordNotFound
+    end
+
+    @post
   rescue ActiveRecord::RecordNotFound
     render json: { error: "Post not found" }, status: :not_found
   end
 
   def post_params
-    params.expect(post: [ :title, content: {} ])
+    params.expect(post: [ :title, :draft, content: {} ])
   end
 end
